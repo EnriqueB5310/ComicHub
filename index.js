@@ -1,7 +1,4 @@
 
-import md5 from 'md5';
-
-
 
 const APIKEY = "23bcbeb0ba49ee64a339eae3329ad658"
 const PrivKey = "16d2a0d1717b7b50c601570e495512d7d9474508"
