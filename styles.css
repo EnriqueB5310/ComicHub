@@ -1,0 +1,33 @@
+body {
+    background-color: whitesmoke;
+}
+
+nav {
+  color:white;
+}
+
+
+
+.carousel-item {
+height: 700px; /* Adjust height as needed */
+width: 100%; /* Set width to 100% to center items */
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #333; /* Dark gray background color */
+background-size: contain; /* Scale the background image to fit */
+background-repeat: no-repeat; /* Prevent image from repeating */
+background-position: center; /* Center the background image */
+}
+
+.carousel-caption {
+background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for caption */
+color: white;
+padding: 10px;
+}
+
+.half-size-image {
+max-width: 100%; /* Ensure image does not exceed container width */
+height: auto; /* Maintain aspect ratio */
+max-height: 350px; /* Set maximum height */
+}
