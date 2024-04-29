@@ -1,9 +1,10 @@
 body {
-    background-color: whitesmoke;
+    background-color: rgb(109, 101, 101);
+   
 }
 
 nav {
-  color:white;
+  color:rgb(187, 184, 184);
 }
 
 
@@ -15,7 +16,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 background-color: #333; /* Dark gray background color */
-background-size: contain; /* Scale the background image to fit */
+background-size: cover; /* Scale the background image to fit */
 background-repeat: no-repeat; /* Prevent image from repeating */
 background-position: center; /* Center the background image */
 }
@@ -23,7 +24,7 @@ background-position: center; /* Center the background image */
 .carousel-caption {
 background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for caption */
 color: white;
-padding: 10px;
+
 }
 
 .half-size-image {
