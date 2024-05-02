@@ -88,33 +88,27 @@ fetch(`https://gateway.marvel.com/v1/public/comics?dateDescriptor=thisWeek&limit
 .then(data => {
   const comics = data.data.results;
 
-  const gridContainer = document.createElement('div');
-  gridContainer.classList.add('row', 'row-cols-3', 'g-4');
-
+  // Display comic search results in release order
+  document.getElementById('newComics').innerHTML = '';
   comics.forEach(comic => {
-    const gridItem = document.createElement('div');
-    gridItem.classList.add('col', 'text-center', 'col-md-4', 'col-sm-6', 'col-xs-12');
-
-    const image = document.createElement('img');
-    image.src = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
-    image.alt = comic.title;
-    image.classList.add('img-fluid', 'comic-image');
-
-    const caption = document.createElement('div');
-    caption.textContent = comic.title;
-    caption.classList.add('caption');
-
-    gridItem.appendChild(image);
-    gridItem.appendChild(caption);
-    gridContainer.appendChild(gridItem);
-
-    // Add event listener to open modal on click
-    gridItem.addEventListener('click', () => {
-      openModal(comic);
-    });
+    const comicInfo = `
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="${comic.thumbnail.path}.${comic.thumbnail.extension}" class="img-fluid rounded-start comic-image" alt="${comic.title}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">${comic.title}</h5>
+              <p class="card-text">${comic.description || 'No description available'}</p>
+              <p class="card-text"><small class="text-muted">Release Date: ${comic.dates.find(date => date.type === 'onsaleDate').date}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.getElementById('newComics').insertAdjacentHTML('beforeend', comicInfo);
   });
-
-  document.getElementById('newComics').appendChild(gridContainer);
 })
 .catch(error => {
   console.error('There was a problem with your fetch operation:', error);
