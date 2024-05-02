@@ -23,7 +23,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
       })
       .then(data => {
         const heroId = data.data.results[0].id; // Get the hero's ID
-        fetch(`https://gateway.marvel.com/v1/public/characters/${heroId}/comics?limit=9&apikey=${APIKEY}&ts=${timestamp}&hash=${hash}`)
+        fetch(`https://gateway.marvel.com/v1/public/characters/${heroId}/comics?limit=50&apikey=${APIKEY}&ts=${timestamp}&hash=${hash}`)
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -43,7 +43,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
               const image = document.createElement('img');
               image.src = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
               image.alt = comic.title;
-              image.classList.add('img-fluid', 'smaller-image');
+              image.classList.add('img-fluid', 'comic-image');
 
               const caption = document.createElement('div');
               caption.textContent = comic.title;
@@ -70,3 +70,39 @@ document.getElementById('searchButton').addEventListener('click', () => {
         console.error('There was a problem with your fetch operation:', error);
       });
   });
+
+
+  function openModal(comic) {
+    // Create modal content
+    const modalContent = `
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">${comic.title}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img src="${comic.thumbnail.path}.${comic.thumbnail.extension}" alt="${comic.title}" class="img-fluid mb-3">
+            <p>${comic.description}</p>
+            <p><strong>Release Date:</strong> ${comic.dates.find(date => date.type === 'onsaleDate').date}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  
+    // Create modal element
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.innerHTML = modalContent;
+  
+    // Add modal to the body and show it
+    document.body.appendChild(modal);
+    const modalInstance = new bootstrap.Modal(modal);
+  
+    // Add event listener to close the modal when the "X" button is clicked
+    modal.querySelector('.btn-close').addEventListener('click', () => {
+      modalInstance.hide();
+    });
+  
+    modalInstance.show();
+  }

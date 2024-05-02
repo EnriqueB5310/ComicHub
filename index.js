@@ -98,7 +98,7 @@ fetch(`https://gateway.marvel.com/v1/public/comics?dateDescriptor=thisWeek&limit
     const image = document.createElement('img');
     image.src = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
     image.alt = comic.title;
-    image.classList.add('img-fluid', 'smaller-image');
+    image.classList.add('img-fluid', 'comic-image');
 
     const caption = document.createElement('div');
     caption.textContent = comic.title;
